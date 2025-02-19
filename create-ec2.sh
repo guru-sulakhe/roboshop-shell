@@ -1,13 +1,13 @@
 #!/bin/bash
 
-instances = ("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web")
+instances=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web")
 
 for name in ${instances[@]}; do
     if [ $name == "shipping" ] || [ $name == "mysql" ]
     then
-        instance_type = "t3.medium"
+        instance_type="t3.medium"
     else
-        instance_type = "t3.micro"
+        instance_type="t3.micro"
     fi
-    echo "creating instance for: $name"
+    echo "creating instance for: $name, instance type: $instance_type"
 done 
