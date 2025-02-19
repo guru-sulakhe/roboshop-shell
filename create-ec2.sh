@@ -9,5 +9,5 @@ for name in ${instances[@]}; do
     else
         instance_type="t3.micro"
     fi
-    echo "creating instance for: $name, instance type: $instance_type"
+    echo "creating instance for: $name with instance type: $instance_type"
 done 
