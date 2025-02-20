@@ -26,16 +26,16 @@ else
 fi
 
 dnf install redis -y &>> $LOGFILE
-VALIDATE $? "Installing Redis"
+VALIDATE $? "Installing redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf &>> $LOGFILE
-VALIDATE $? "Remote Server Access"
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf &>> $LOGFILE
+VALIDATE $? "Remote Server Access to redis"
 
 systemctl enable redis &>> $LOGFILE
-VALIDATE $? "Enabling Redis"
+VALIDATE $? "Enabling redis"
 
 systemctl start redis &>> $LOGFILE
-VALIDATE $? "Start Redis"
+VALIDATE $? "Start redis"
 
 
 
