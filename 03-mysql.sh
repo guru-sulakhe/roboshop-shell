@@ -35,7 +35,8 @@ VALIDATE $? "Enabling mysqld"
 systemctl start mysqld &>> $LOGFILE
 VALIDATE $? "Starting mysqld"
 
-mysql_secure_installation --set-root-pass RoboShop@1
+mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOGFILE
+VALIDATE $? " Changing the default root password in order to start using the database service"
 
 
 
