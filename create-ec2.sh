@@ -1,6 +1,7 @@
 #!/bin/bash
 
 instances=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web")
+domain_name="guru97s.cloud"
 
 for name in ${instances[@]}; do
     if [ $name == "shipping" ] || [ $name == "mysql" ]
