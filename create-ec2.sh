@@ -13,6 +13,7 @@ for name in ${instances[@]}; do
     fi
     echo "creating instance for: $name with instance type: $instance_type"
     instance_id=$(aws ec2 run-instances --image-id ami-454adgd12dd3dedbr --instance-type $instance_type --security-group-ids sg-903004f8oxg1sw4q --subnet-id subnet-6e7f829e4483287954 --query "Instances[0].InstanceId" --output text) #creating ec2 instance
+    echo "instance created for $name"
 
     aws ec2 create-tags --resource $instance_id --tags Key=Name, Value=$name #creating tags for var instance_id 
 
@@ -27,7 +28,8 @@ for name in ${instances[@]}; do
     fi
 
     #creating R53 record for ec2-instances
-    aws route53 change-resource-record-sets --hosted-zone-id $zoneid --change-batch '
+    echo "creating R53 record for $name"
+    aws route53 change-resource-record-sets --hosted-zone-id $hosted_zone_id --change-batch '
     {
     "Comment": "Creating a record set for '$name'"
     ,"Changes": [{
