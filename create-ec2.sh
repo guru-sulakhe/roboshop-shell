@@ -14,5 +14,5 @@ for name in ${instances[@]}; do
 
     aws ec2 create-tags --resource $instance_id --tags Key=Name, Value=$name #creating tags for var instance_id 
     
-    private_ip=$(aws ec2 describe-instances --instance-ids i-04429f69b1bbd7867 --query 'Reservations[0].Instances[0].[PrivateIpAddress]' --output text) #describing ec2,for displaying IP address
+    private_ip=$(aws ec2 describe-instances --instance-ids i-04429f69b1bbd7867 --query 'Reservations[0].Instances[0].[PrivateIpAddress]' --output text) #describing ec2,for displaying private-IP address
 done 
