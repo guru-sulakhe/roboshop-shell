@@ -56,3 +56,15 @@ VALIDATE $? "Downloading dependencies"
 cp catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue service to etc"
 
+systemctl daemon-reload &>> $LOGFILE
+VALIDATE $? "loading the service"
+
+systemctl enable catalogue &>> $LOGFILE
+VALIDATE $? "Enabling catalogue"
+
+systemctl start catalogue &>> $LOGFILE
+VALIDATE $? "Staring catalogue service"
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+VALIDATE $? "copying mongo.repo to etc directory"
+
