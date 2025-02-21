@@ -53,3 +53,6 @@ VALIDATE $? "unzip catalogue.zip"
 npm install &>> $LOGFILE
 VALIDATE $? "Downloading dependencies"
 
+cp catalogue.service /etc/systemd/system/catalogue.service
+VALIDATE $? "copying catalogue service to etc"
+
