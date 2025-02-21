@@ -35,3 +35,21 @@ VALIDATE $? "Enabling nodejs"
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "Installing nodejs"
 
+useradd roboshop &>> $LOGFILE
+VALIDATE $? "Useradd roboshop"
+
+mkdir /app &>> $LOGFILE
+VALIDATE $? "Creating app directory"
+
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+VALIDATE $? "Downloading catalogue code and storing in tmp directory"
+
+cd /app &>> $LOGFILE
+VALIDATE $? "Changing to app directory"
+
+unzip /tmp/catalogue.zip &>> $LOGFILE
+VALIDATE $? "unzip catalogue.zip"
+
+npm install &>> $LOGFILE
+VALIDATE $? "Downloading dependencies"
+
