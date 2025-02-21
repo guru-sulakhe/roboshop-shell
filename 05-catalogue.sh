@@ -48,7 +48,7 @@ cd /app &>> $LOGFILE
 VALIDATE $? "Changing to app directory"
 
 unzip /tmp/catalogue.zip &>> $LOGFILE
-VALIDATE $? "unzip catalogue.zip"
+VALIDATE $? "unziping  catalogue.zip"
 
 npm install &>> $LOGFILE
 VALIDATE $? "Downloading dependencies"
@@ -68,3 +68,8 @@ VALIDATE $? "Staring catalogue service"
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? "copying mongo.repo to etc directory"
 
+dnf install -y mongodb-mongosh &>> $LOGFILE
+VALIDATE $? "Installing mongodb client"
+
+mongosh --host mongodb.guru97s.cloud </app/schema/catalogue.js &>> $LOGFILE
+VALIDATE $? "Load schema for catalogue from mongodb"
