@@ -54,20 +54,36 @@ VALIDATE $? "changing to app directory"
 unzip /tmp/shipping.zip &>> $LOGFILE
 VALIDATE $? "unziping shipping.zip"
 
-mvn clean package
+mvn clean package &>> $LOGFILE
+VALIDATE $? "cleaning mvn package"
 
-mv target/shipping-1.0.jar shipping.jar
+mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
+VALIDATE $? "moving shipping.jar"
+ 
+cp shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
+VALIDATE $? "copying shipping.service to etc directory"
 
-cp shipping /etc/systemd/system/shipping.service
+systemctl daemon-reload &>> $LOGFILE
+VALIDATE $? "Loading the service"
 
-systemctl daemon-reload
+systemctl enable shipping &>> $LOGFILE
+VALIDATE $? "Enabling shipping service"
 
-systemctl enable shipping 
+systemctl start shipping &>> $LOGFILE
+VALIDATE $? "Startign shipping service"
 
-systemctl start shipping
-
-dnf install mysql -y
+dnf install mysql -y &>> $LOGFILE
+VALIDATE $? "Installing mysql client"
 
 mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e "use cities" &>> $LOGFILE
+if [ $? -ne 0 ]
+then
+    echo "Schema is ... LOADING"
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
+    VALIDATE $? "Loading schema"
+else
+    echo -e "Schema already exists... $Y SKIPPING $N"
+fi
 
-systemctl restart shipping
+systemctl restart shipping &>> $LOGFILE
+VALIDATE $? "Restarting shipping service"
