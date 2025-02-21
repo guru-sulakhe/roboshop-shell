@@ -26,3 +26,50 @@ else
     echo "You are super-user"
 fi
 
+dnf module disable nodejs -y &>> $LOGFILE
+VALIDATE $? "Disabling nodejs"
+
+dnf module enable nodejs:20 -y &>> $LOGFILE
+VALIDATE $? "Enabling nodejs:20"
+
+dnf install nodejs -y &>> $LOGFILE
+VALIDATE $? "Insatalling nodejs"
+
+useradd roboshop $>> $LOGFILE
+VALIDATE $? "Adding user roboshop"
+
+mkdir /app &>> $LOGFILE
+VALIDATE $? "Changing to app directory"
+
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
+VALIDATE $? "Downloading user code and storing in tmp directory"
+
+cd /app &>> $LOGFILE
+VALIDATE $? "Changing to app directory"
+
+unzip /tmp/user.zip &>> $LOGFILE
+VALIDATE $? "Unziping user.zip in tmp directory"
+
+npm install &>> $LOGFILE
+VALIDATE $? "Installing dependencies"
+
+cp user.service /etc/systemd/system/user.service &>> $LOGFILE
+VALIDATE $? "Copying user.service to etc directory"
+
+systemctl daemon-reload &>> $LOGFILE
+VALIDATE $? "Loading service"
+
+systemctl enable user &>> $LOGFILE
+VALIDATE $? "Enabling user service"
+
+systemctl start user &>> $LOGFILE
+VALIDATE $? "Starting user service"
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+VALIDATE $? "Copying mongo.repo to etc directory"
+
+dnf install mongodb-mongosh -y &>> $LOGFILE
+VALIDATE $? "Installing mongodb client"
+
+mongosh --host mongodb.guru97s.cloud </app/schema/user.js &>> $LOGFILE
+VALIDATE $? "Loading mongodb schema from mongodb"
