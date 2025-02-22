@@ -8,6 +8,7 @@ R = "\e[31m"
 G = "\e[32m"
 Y = "\e[33m"
 N = "\e[0m"
+MONGO_HOST=mongodb.guru97s.cloud
 
 VALIDATE(){
     if [$1 -ne 0]
@@ -76,5 +77,12 @@ VALIDATE $? "Copying mongo.repo to etc directory"
 dnf install mongodb-mongosh -y &>> $LOGFILE
 VALIDATE $? "Installing mongodb client"
 
-mongosh --host mongodb.guru97s.cloud </app/schema/user.js &>> $LOGFILE
-VALIDATE $? "Loading mongodb schema from mongodb"
+SCHEMA_EXISTS=$(mongosh --host $MONGO_HOST --quiet --eval "db.getMongo().getDBNames().indexOf('users')") &>> $LOGFILE
+if [ $SCHEMA_EXISTS -lt 0 ]
+then
+    echo "users schema is not exists, loading users schema"
+    mongosh --host $MONGO_HOST </app/schema/user.js &>> $LOGFILE
+    VALIDATE $? "Loading mongodb schema from mongodb"
+else
+    echo "users schema already exists.. so $Y SKIPPING $N"
+
