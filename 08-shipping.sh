@@ -55,7 +55,7 @@ unzip /tmp/shipping.zip &>> $LOGFILE
 VALIDATE $? "unziping shipping.zip"
 
 mvn clean package &>> $LOGFILE
-VALIDATE $? "cleaning mvn package"
+VALIDATE $? "packaging shipping"
 
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 VALIDATE $? "moving shipping.jar"
