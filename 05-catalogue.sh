@@ -8,6 +8,7 @@ R = "\e[31m"
 G = "\e[32m"
 Y = "\e[33m"
 N = "\e[0m"
+MONGO_HOST=mongodb.guru97s.cloud
 
 VALIDATE(){
     if [$1 -ne 0]
@@ -79,5 +80,14 @@ VALIDATE $? "copying mongo.repo to etc directory"
 dnf install -y mongodb-mongosh &>> $LOGFILE
 VALIDATE $? "Installing mongodb client"
 
-mongosh --host mongodb.guru97s.cloud </app/schema/catalogue.js &>> $LOGFILE
-VALIDATE $? "Load schema for catalogue from mongodb"
+SCHEMA_EXISTS=$(mongosh --host $MONGO_HOST --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')") &>> $LOGFILE #check catalogue is existed in db or not
+if [ $? -ne 0 ]
+then 
+    echo "schema does not exists, LOADING SCHEMA"
+    mongosh --host $MONGO_HOST </app/schema/catalogue.js &>> $LOGFILE
+    VALIDATE $? "Load schema for catalogue from mongodb"
+else
+    echo "schema is already exists.. so $Y SKIPPING $N"
+
+
+
