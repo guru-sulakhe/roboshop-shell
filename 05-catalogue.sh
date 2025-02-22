@@ -86,7 +86,7 @@ if [ $SCHEMA_EXISTS -lt 0 ]
 then 
     echo "schema does not exists, LOADING SCHEMA"
     mongosh --host $MONGO_HOST </app/schema/catalogue.js &>> $LOGFILE
-    VALIDATE $? "Load schema for catalogue from mongodb"
+    VALIDATE $? "Loading catalogue data to mongodb"
 else
     echo "schema is already exists.. so $Y SKIPPING $N"
 fi
