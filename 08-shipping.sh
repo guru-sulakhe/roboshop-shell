@@ -58,7 +58,7 @@ mvn clean package &>> $LOGFILE
 VALIDATE $? "packaging shipping"
 
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
-VALIDATE $? "moving shipping.jar"
+VALIDATE $? "Renaming the artifact"
  
 cp /home/ec2-user/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
 VALIDATE $? "copying shipping.service to etc directory"
