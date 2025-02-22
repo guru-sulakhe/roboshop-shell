@@ -57,7 +57,7 @@ VALIDATE $? "unzipping payment.zip in app directory"
 pip3.11 install -r requirements.txt &>> $LOGFILE
 VALIDATE $? "installing python build dependencies"
 
-cp payment.service /etc/systemd/system/payment.service &>> $LOGFILE
+cp /home/ec2-user/roboshop-shell/payment.service /etc/systemd/system/payment.service &>> $LOGFILE
 VALIDATE $? "copying payment.service to etc directory"
 
 systemctl daemon-reload &>> $LOGFILE
