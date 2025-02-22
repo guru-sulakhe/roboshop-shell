@@ -42,7 +42,7 @@ fi
 rm -rf /app &>> $LOGFILE
 VALIDATE $? "clean up existing directory"
 
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE
 VALIDATE $? "Changing to app directory"
 
 curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>> $LOGFILE
@@ -60,7 +60,7 @@ VALIDATE $? "cleaning mvn package"
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 VALIDATE $? "moving shipping.jar"
  
-cp shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
+cp /home/ec2-user/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
 VALIDATE $? "copying shipping.service to etc directory"
 
 systemctl daemon-reload &>> $LOGFILE
