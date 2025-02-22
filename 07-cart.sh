@@ -58,7 +58,7 @@ VALIDATE $? "Unziping cart.zip in tmp directory"
 npm install &>> $LOGFILE
 VALIDATE $? "Installing dependencies"
 
-cp cart.service /etc/systemd/system/cart.service &>> $LOGFILE
+cp /home/ec2-user/roboshop-shell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
 VALIDATE $? "Copying user.service to etc directory"
 
 systemctl daemon-reload &>> $LOGFILE
