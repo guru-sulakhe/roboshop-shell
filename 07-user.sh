@@ -43,7 +43,7 @@ then
 else
     echo "roboshop user already exists, so SKIPPING"
 
-mkdir -p /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE #if not exists it creates,if exists skipping
 VALIDATE $? "Changing to app directory"
 
 curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
@@ -58,7 +58,7 @@ VALIDATE $? "Unziping user.zip in tmp directory"
 npm install &>> $LOGFILE
 VALIDATE $? "Installing dependencies"
 
-cp user.service /etc/systemd/system/user.service &>> $LOGFILE
+cp /home/ec2-user/roboshop-shell/user.service /etc/systemd/system/user.service &>> $LOGFILE
 VALIDATE $? "Copying user.service to etc directory"
 
 systemctl daemon-reload &>> $LOGFILE
