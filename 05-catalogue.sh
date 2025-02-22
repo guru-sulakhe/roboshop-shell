@@ -43,6 +43,9 @@ then
 else 
     echo "roboshop user already exists.. so $Y skipping $N"
 
+rm -rf /app &>> $LOGFILE
+VALIDATE $? "Removing /app existed directory "
+
 mkdir -p /app &>> $LOGFILE #if not exists then it will create, if exists it will be skipped
 VALIDATE $? "Creating app directory"
 
