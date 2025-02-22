@@ -43,6 +43,7 @@ then
     VALIDATE $? "Useradd roboshop"
 else 
     echo "roboshop user already exists.. so $Y skipping $N"
+fi
 
 rm -rf /app &>> $LOGFILE
 VALIDATE $? "Removing /app existed directory "
@@ -88,6 +89,7 @@ then
     VALIDATE $? "Load schema for catalogue from mongodb"
 else
     echo "schema is already exists.. so $Y SKIPPING $N"
+fi
 
 
 
