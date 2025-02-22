@@ -43,7 +43,7 @@ then
 else 
     echo "roboshop user already exists.. so $Y skipping $N"
 
-mkdir -p /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE #if not exists then it will create, if exists it will be skipped
 VALIDATE $? "Creating app directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
