@@ -35,10 +35,15 @@ VALIDATE $? "Enabling nodejs:20"
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "Insatalling nodejs"
 
-useradd roboshop $>> $LOGFILE
-VALIDATE $? "Adding user roboshop"
+id roboshop &>> $LOGFILE
+if [ $? -ne 0 ]
+then
+    useradd roboshop &>> $LOGFILE
+    VALIDATE $? "Adding user roboshop"
+else
+    echo "roboshop user already exists, so SKIPPING"
 
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE
 VALIDATE $? "Changing to app directory"
 
 curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
