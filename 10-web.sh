@@ -48,7 +48,7 @@ VALIDATE $? "changing to usr directory"
 unzip /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "unziping web.zip in tmp directory"
 
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
+cp /home/ec2-user/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 VALIDATE $? "copying roboshop.conf to etc directory"
 
 systemctl restart nginx &>> $LOGFILE
