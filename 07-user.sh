@@ -43,6 +43,7 @@ then
     VALIDATE $? "Adding user roboshop"
 else
     echo "roboshop user already exists, so SKIPPING"
+fi
 
 mkdir -p /app &>> $LOGFILE #if not exists it creates,if exists skipping
 VALIDATE $? "Changing to app directory"
@@ -85,4 +86,5 @@ then
     VALIDATE $? "Loading mongodb schema from mongodb"
 else
     echo "users schema already exists.. so $Y SKIPPING $N"
+fi
 
