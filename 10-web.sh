@@ -37,7 +37,7 @@ systemctl start nginx &>> $LOGFILE
 VALIDATE $? "Starting nginx"
 
 rm -rf /usr/share/nginx/html/* &>> $LOGFILE
-VALIDATE $? "Removing usr directory"
+VALIDATE $? "Removing default usr directory"
 
 curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
 VALIDATE $? "downloading web.zip tmp directory"
