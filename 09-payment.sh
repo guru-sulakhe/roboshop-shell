@@ -36,7 +36,7 @@ then
     useradd roboshop &>> $LOGFILE
     VALIDATE $? "adding user roboshop"
 else
-    echo "user roboshop is already exists so skipping.."
+    echo "user roboshop is already exists... so $Y skipping $N"
 fi
 
 rm -rf /app &>> $LOGFILE
