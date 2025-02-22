@@ -80,7 +80,7 @@ if [ $? -ne 0 ]
 then
     echo "Schema is ... LOADING"
     mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
-    VALIDATE $? "Loading schema"
+    VALIDATE $? "Loading schema shipping"
 else
     echo -e "Schema already exists... $Y SKIPPING $N"
 fi
