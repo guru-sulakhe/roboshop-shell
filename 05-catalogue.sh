@@ -82,7 +82,7 @@ dnf install -y mongodb-mongosh &>> $LOGFILE
 VALIDATE $? "Installing mongodb client"
 
 SCHEMA_EXISTS=$(mongosh --host $MONGO_HOST --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')") &>> $LOGFILE #check catalogue is existed in db or not
-if [ $? -ne 0 ]
+if [ $SCHEMA_EXISTS -lt 0 ]
 then 
     echo "schema does not exists, LOADING SCHEMA"
     mongosh --host $MONGO_HOST </app/schema/catalogue.js &>> $LOGFILE
