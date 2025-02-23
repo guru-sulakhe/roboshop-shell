@@ -61,7 +61,7 @@ unzip /tmp/catalogue.zip &>> $LOGFILE
 VALIDATE $? "unziping  catalogue.zip"
 
 npm install &>> $LOGFILE
-VALIDATE $? "Downloading dependencies"
+VALIDATE $? "Downloading nodejs dependencies"
 
 cp /home/ec2-user/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 VALIDATE $? "copying catalogue service to etc"
