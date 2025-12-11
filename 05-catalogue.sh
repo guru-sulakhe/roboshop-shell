@@ -81,7 +81,7 @@ VALIDATE $? "copying mongo.repo to etc directory"
 dnf install -y mongodb-mongosh &>> $LOGFILE
 VALIDATE $? "Installing mongodb client"
 
-SCHEMA_EXISTS=$(mongosh --host $MONGO_HOST --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')") &>> $LOGFILE #check catalogue is existed in db or not
+SCHEMA_EXISTS=$(mongosh --host $MONGO_HOST --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')") &>> $LOGFILE #checking database 'catalogue' SCHEMA is existed in db or not
 if [ $SCHEMA_EXISTS -lt 0 ]
 then 
     echo "schema does not exists, LOADING SCHEMA"
